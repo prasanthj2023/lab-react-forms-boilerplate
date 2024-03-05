@@ -1,26 +1,41 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-.form-parent{
-    width: 300px;
-    height: 300px;
-    background-color: aliceblue;
+.parent{
+    margin: auto;
+    width: 100%;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: white;
+  }
+  
+  form{
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    margin-top: 10%;
-    margin-left: 40%;
-    padding: 50px;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  
+  label,input{
+    display: block;
+    text-align: left;
+  }
+  
+  input{
+    border: 0px ;
+    margin: 5px 0px;
     border-radius: 10px;
-}
-
-.form-parent input{
-    width: 200px;
     height: 30px;
-    font-size: 16px;
-    border-radius: 5px;
-}
+    font-family: monospace;
+    border: 2px solid black;
+  }
+  
+  label{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-style: italic;
+  }
+  
+  .btn{
+    background-color: greenyellow;
+    font-size: large;
+    font-weight: bolder;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: black;
+  }

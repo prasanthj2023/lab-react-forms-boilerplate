@@ -2,3 +2,20 @@
 *{
     font-family: 'Ubuntu', sans-serif;
 }
+body {
+    margin: 0;
+    display: flex;
+    place-items: center;
+    justify-content: center;
+    min-width: 320px;
+    min-height: 100vh;
+    background-color: rgb(94, 94, 94);
+  }
+  
+  
+  input ~ p{
+      color: red;
+      font-family: monospace;
+      font-weight: bold;
+  }
+  

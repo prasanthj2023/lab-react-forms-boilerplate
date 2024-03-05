@@ -1,107 +1,103 @@
 import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import "../CSS/Forms.css"
 
-const Forms = () => {
-  const [formData, setFormData] = useState({
-    firstname: "",
-    lastname: "",
+function Forms() {
+  let [inputData, changeInputData] = useState({
+    firstName: "",
+    lastName: "",
     email: "",
     phoneNumber: "",
   });
 
-  const [formError, setFormError] = useState({});
-  const [fSubmit, setFSubmit] = useState(false);
+  let [formError, setError] = useState({});
+  let [formSubmit, setSubmit] = useState(false);
 
   const handleInput = (e) => {
     let { name, value } = e.target;
-    setFormData({
-      ...formData,
+    changeInputData({
+      ...inputData,
       [name]: value,
     });
   };
 
-  const formSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    let errors = validate(formData);
-    console.log(errors);
-    setFormError(errors);
+    let error = validate(inputData);
+    setError(error);
+    console.log(error)
+    console.log(inputData)
 
-    let errorKey = Object.keys(errors);
-    if (errorKey.length == 0) {
-      // let the user to register
-      toast("Registraion Successful!");
-      setFSubmit(true);
+    let errorKeys = Object.keys(error);
+
+    if (errorKeys.length == 0) {
+      setSubmit(true);
     } else {
-      setFSubmit(false);
+      setSubmit(false);
     }
   };
 
   const validate = (data) => {
     let error = {};
-    if (data.firstname.trim() == "") {
-      error.firstname = "Please enter the firstname";
+    if (data.firstName.trim() === "") {
+      error.firstName = "Please enter the first name";
     }
-    if (data.lastname.trim() == "") {
-      error.lastname = "Please enter the lastname";
+    if (data.lastName.trim() === "") {
+      error.lastName = "Please enter the last name";
     }
-    if (data.email.trim() == "") {
+    if (data.email.trim() === "") {
       error.email = "Please enter the email";
     }
-    if (data.phoneNumber.trim() == "" || data.phoneNumber.trim().length < 10) {
-      error.phoneNumber = "Please enter the phone number";
+    if (data.phoneNumber.trim() === "" || data.phoneNumber.trim().length != 10) {
+      error.phoneNumber = "Please enter a valid phone number";
     }
     return error;
   };
-
+  
   return (
-    <>
-      <div className="form-parent">
-        <ToastContainer />
-        <form onSubmit={formSubmit}>
-          <div className="tost">{fSubmit && <p>Registration Sucessful!</p>}</div>
-          <label htmlFor="firstname">Enter first name</label>
-          <input
-            type="text"
-            name="firstname"
-            placeholder="first name"
-            onChange={handleInput}
-          /> <br />
-          {formError.firstname ? <p>{formError.firstname}</p> : ""}
+    <div className="parent">
+      <form onSubmit={handleSubmit}>
+        <div>{formSubmit && <p>Registration Successuful</p>}</div>
+        <label htmlFor="firstName">Enter Name</label>
+        <input
+          type="text"
+          name="firstName"
+          placeholder="First Name Here"
+          onChange={handleInput}
+        />
+        {formError.firstName ? <p>{formError.firstName}</p> : null}
 
-          <label htmlFor="lastname">Enter last name</label>
-          <input
-            type="text"
-            name="lastname"
-            placeholder="last name"
-            onChange={handleInput}
-          /> <br />
-          {formError.lastname ? <p>{formError.lastname}</p> : ""}
+        <label htmlFor="lastName">Enter Last Name</label>
+        <input
+          type="text"
+          name="lastName"
+          placeholder="Last Name Here"
+          onChange={handleInput}
+        />
+        {formError.lastName ? <p>{formError.lastName}</p> : null}
 
-          <label htmlFor="email">Enter email</label> <br />
-          <input
-            type="email"
-            name="email"
-            placeholder="email"
-            onChange={handleInput}
-          /> <br />
-          {formError.email ? <p>{formError.email}</p> : ""}
 
-          <label htmlFor="phoneNumber">Enter phone number</label>
-          <input
-            type="number"
-            name="phoneNumber"
-            placeholder="phone number"
-            onChange={handleInput}
-          /> <br />
-          {formError.phoneNumber ? <p>{formError.phoneNumber}</p> : ""}
+        <label htmlFor="email">Enter Email</label>
+        <input
+          type="email"
+          name="email"
+          placeholder=" Email here"
+          onChange={handleInput}
+        />
+        {formError.email ? <p>{formError.email}</p> : null}
 
-          <input type="submit" value={"Register"} />
-        </form>
-      </div>
-    </>
+        <label htmlFor="phoneNumber">Enter Contact</label>
+        <input
+          type="number"
+          name="phoneNumber"
+          placeholder="Phone Number Here"
+          onChange={handleInput}
+        />
+        {formError.phoneNumber != "" ? <p>{formError.phoneNumber}</p> : null}
+
+        <input type="submit" value={"Register"} className="btn"/>
+      </form>
+    </div>
   );
-};
+}
 
 export default Forms;
